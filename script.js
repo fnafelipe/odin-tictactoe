@@ -1,3 +1,9 @@
+function createPlayer(mark) {
+  const getMarker = () => mark;
+
+  return { getMarker };
+}
+
 const gameBoard = (() => {
   let boardState = [
     ["", "", ""],
@@ -39,3 +45,10 @@ console.log(gameBoard.getBoardState());
 
 gameBoard.resetboardState();
 console.log(gameBoard.getBoardState());
+
+const playerOne = createPlayer("X");
+const playerTwo = createPlayer("O");
+
+console.table(playerOne);
+console.table(playerOne.getMarker());
+console.table(playerTwo.getMarker());
