@@ -38,6 +38,7 @@ const gameController = (() => {
   const playerOne = createPlayer("X");
   const playerTwo = createPlayer("O");
   let currentPlayer = playerOne;
+  let isGameOver = false;
 
   const getCurrentPlayer = () => currentPlayer;
 
@@ -45,27 +46,47 @@ const gameController = (() => {
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
   };
 
+  const checkWin = () => {
+    let currentBoard = gameBoard.getBoardState();
+    let mark = currentPlayer.getMarker();
+
+    if (
+      (currentBoard[0][0] === mark &&
+        currentBoard[1][1] === mark &&
+        currentBoard[2][2] === mark) ||
+      (currentBoard[0][2] === mark &&
+        currentBoard[1][1] === mark &&
+        currentBoard[2][0] === mark)
+    ) {
+      console.log(`${mark} won!`);
+      isGameOver = true;
+    }
+
+    for (let i = 0; i < 3; i++) {
+      if (
+        (currentBoard[0][i] === mark &&
+          currentBoard[1][i] === mark &&
+          currentBoard[2][i] === mark) ||
+        (currentBoard[i][0] === mark &&
+          currentBoard[i][1] === mark &&
+          currentBoard[i][2] === mark)
+      ) {
+        console.log(`${mark} won!`);
+        isGameOver = true;
+        console.log(isGameOver);
+      }
+    }
+  };
+
   const makePlay = (row, column) => {
     if (gameBoard.changeBoardState(currentPlayer.getMarker(), row, column)) {
+      checkWin();
       turnPlayer();
     }
   };
 
-  return { getCurrentPlayer, turnPlayer, makePlay };
+  return { getCurrentPlayer, turnPlayer, makePlay, isGameOver };
 })();
-
-gameController.makePlay(0, 1);
-console.table(gameBoard.getBoardState());
-gameController.makePlay(0, 2);
-console.table(gameBoard.getBoardState());
-gameController.makePlay(1, 1);
-console.table(gameBoard.getBoardState());
-gameController.makePlay(0, 2);
-console.table(gameBoard.getBoardState());
-gameController.makePlay(2, 0);
-console.table(gameBoard.getBoardState());
-gameController.makePlay(2, 1);
-console.table(gameBoard.getBoardState());
 
 /*
 console.log(gameBoard.getBoardState());
@@ -91,4 +112,18 @@ console.table(gameController);
 console.log(gameController.getCurrentPlayer().getMarker());
 gameController.turnPlayer();
 console.log(gameController.getCurrentPlayer().getMarker());
+
 */
+
+gameController.makePlay(0, 1);
+console.table(gameBoard.getBoardState());
+gameController.makePlay(0, 2);
+console.table(gameBoard.getBoardState());
+gameController.makePlay(1, 1);
+console.table(gameBoard.getBoardState());
+gameController.makePlay(0, 2);
+console.table(gameBoard.getBoardState());
+gameController.makePlay(2, 0);
+console.table(gameBoard.getBoardState());
+gameController.makePlay(2, 1);
+console.table(gameBoard.getBoardState());
