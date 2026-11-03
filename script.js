@@ -4,21 +4,6 @@ function createPlayer(mark) {
   return { getMarker };
 }
 
-const gameController = (() => {
-  const playerOne = createPlayer("X");
-  const playerTwo = createPlayer("O");
-  let currentPlayer = playerOne;
-
-  const getCurrentPlayer = () => currentPlayer;
-
-  const turnPlayer = () => {
-    currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
-  };
-
-  return { getCurrentPlayer, turnPlayer };
-})();
-
-
 const gameBoard = (() => {
   let boardState = [
     ["", "", ""],
@@ -49,10 +34,39 @@ const gameBoard = (() => {
   return { getBoardState, changeBoardState, resetboardState };
 })();
 
-console.table(gameController);
-console.log(gameController.getCurrentPlayer().getMarker());
-gameController.turnPlayer();
-console.log(gameController.getCurrentPlayer().getMarker());
+const gameController = (() => {
+  const playerOne = createPlayer("X");
+  const playerTwo = createPlayer("O");
+  let currentPlayer = playerOne;
+
+  const getCurrentPlayer = () => currentPlayer;
+
+  const turnPlayer = () => {
+    currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
+  };
+
+  const makePlay = (row, column) => {
+    if (gameBoard.changeBoardState(currentPlayer.getMarker(), row, column)) {
+      turnPlayer();
+    }
+  };
+
+  return { getCurrentPlayer, turnPlayer, makePlay };
+})();
+
+gameController.makePlay(0, 1);
+console.table(gameBoard.getBoardState());
+gameController.makePlay(0, 2);
+console.table(gameBoard.getBoardState());
+gameController.makePlay(1, 1);
+console.table(gameBoard.getBoardState());
+gameController.makePlay(0, 2);
+console.table(gameBoard.getBoardState());
+gameController.makePlay(2, 0);
+console.table(gameBoard.getBoardState());
+gameController.makePlay(2, 1);
+console.table(gameBoard.getBoardState());
+
 /*
 console.log(gameBoard.getBoardState());
 
@@ -72,4 +86,9 @@ const playerTwo = createPlayer("O");
 console.table(playerOne);
 console.log(playerOne.getMarker());
 console.log(playerTwo.getMarker());
+
+console.table(gameController);
+console.log(gameController.getCurrentPlayer().getMarker());
+gameController.turnPlayer();
+console.log(gameController.getCurrentPlayer().getMarker());
 */
