@@ -4,6 +4,21 @@ function createPlayer(mark) {
   return { getMarker };
 }
 
+const gameController = (() => {
+  const playerOne = createPlayer("X");
+  const playerTwo = createPlayer("O");
+  let currentPlayer = playerOne;
+
+  const getCurrentPlayer = () => currentPlayer;
+
+  const turnPlayer = () => {
+    currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
+  };
+
+  return { getCurrentPlayer, turnPlayer };
+})();
+
+
 const gameBoard = (() => {
   let boardState = [
     ["", "", ""],
@@ -34,6 +49,11 @@ const gameBoard = (() => {
   return { getBoardState, changeBoardState, resetboardState };
 })();
 
+console.table(gameController);
+console.log(gameController.getCurrentPlayer().getMarker());
+gameController.turnPlayer();
+console.log(gameController.getCurrentPlayer().getMarker());
+/*
 console.log(gameBoard.getBoardState());
 
 gameBoard.changeBoardState("X", 1, 2);
@@ -50,5 +70,6 @@ const playerOne = createPlayer("X");
 const playerTwo = createPlayer("O");
 
 console.table(playerOne);
-console.table(playerOne.getMarker());
-console.table(playerTwo.getMarker());
+console.log(playerOne.getMarker());
+console.log(playerTwo.getMarker());
+*/
