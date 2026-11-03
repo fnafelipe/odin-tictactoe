@@ -7,7 +7,16 @@ const gameBoard = (() => {
 
   const getBoardState = () => boardState;
 
-  return { getBoardState };
+  const changeBoardState = (mark, row, column) => {
+    if (!boardState[row][column]) {
+      boardState[row][column] = mark;
+    }
+  };
+
+  return { getBoardState, changeBoardState };
 })();
 
+console.log(gameBoard.getBoardState());
+
+gameBoard.changeBoardState("X", 1, 2);
 console.log(gameBoard.getBoardState());
