@@ -5,5 +5,9 @@ const gameBoard = (() => {
     ["", "", ""],
   ];
 
+  const getBoardState = () => boardState;
 
+  return { getBoardState };
 })();
+
+console.log(gameBoard.getBoardState());
