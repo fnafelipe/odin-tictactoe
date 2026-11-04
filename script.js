@@ -140,10 +140,10 @@ const displayController = (() => {
     } else {
       boardDisplay.classList.remove("active");
       gameController.turnIsGameOver();
+      gameBoard.resetboardState();
       buttonDisplay.id = "start";
       buttonDisplay.textContent = "Start Game";
     }
-    console.log(gameController.getIsGameOver());
   });
 
   boardDisplay.addEventListener("click", (event) => {
