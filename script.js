@@ -1,7 +1,8 @@
-function createPlayer(mark) {
+function createPlayer(name, mark) {
+  const getName = () => name;
   const getMarker = () => mark;
 
-  return { getMarker };
+  return { getName, getMarker };
 }
 
 const gameBoard = (() => {
@@ -35,8 +36,9 @@ const gameBoard = (() => {
 })();
 
 const gameController = (() => {
-  const playerOne = createPlayer("X");
-  const playerTwo = createPlayer("O");
+  const playerOne = createPlayer("Player 1", "X");
+  const playerTwo = createPlayer("Player 2", "O");
+
   let currentPlayer = playerOne;
   let isGameOver = true;
 
@@ -56,6 +58,7 @@ const gameController = (() => {
     if (!currentBoard.flat().includes("")) {
       isGameOver = true;
       console.log("the game was tied!");
+      displayController.resultDisplay(true);
     }
   };
 
@@ -91,6 +94,8 @@ const gameController = (() => {
 
     if (!isGameOver) {
       checkTie(currentBoard);
+    } else {
+      displayController.resultDisplay(false);
     }
   };
 
@@ -121,6 +126,8 @@ const gameController = (() => {
 const displayController = (() => {
   const control = document.querySelector(".control");
 
+  const result = document.querySelector(".result");
+
   const buttonDisplay = document.createElement("button");
 
   buttonDisplay.textContent = "Start Game";
@@ -130,6 +137,14 @@ const displayController = (() => {
   control.appendChild(buttonDisplay);
 
   const boardDisplay = document.querySelector(".board");
+
+  const resultDisplay = (wasTied) => {
+    if (!wasTied) {
+      result.textContent = `${gameController.getCurrentPlayer().getName()} won the game!`;
+    } else {
+      result.textContent = "The game was tied!";
+    }
+  };
 
   const startDisplay = () => {
     buttonDisplay.id = "reset";
@@ -152,6 +167,7 @@ const displayController = (() => {
     gameBoard.resetboardState();
     console.log(gameController.getIsGameOver());
     boardDisplay.classList.remove("active");
+    result.textContent = "";
   };
 
   const updateDisplay = () => {
@@ -186,6 +202,8 @@ const displayController = (() => {
     console.table(gameBoard.getBoardState());
     updateDisplay();
   });
+
+  return { resultDisplay };
 })();
 
 /*
