@@ -131,19 +131,49 @@ const displayController = (() => {
 
   const boardDisplay = document.querySelector(".board");
 
-  buttonDisplay.addEventListener("click", () => {
-    if (gameController.getIsGameOver()) {
-      boardDisplay.classList.add("active");
+  const startDisplay = () => {
+    buttonDisplay.id = "reset";
+    buttonDisplay.textContent = "Reset game";
+    console.log(gameController.getIsGameOver());
+    gameController.turnIsGameOver();
+    console.log(gameController.getIsGameOver());
+    boardDisplay.classList.add("active");
+  };
+
+  const resetDisplay = () => {
+    buttonDisplay.id = "start";
+    buttonDisplay.textContent = "Start game";
+    console.log(gameController.getIsGameOver());
+
+    if (!gameController.getIsGameOver()) {
       gameController.turnIsGameOver();
-      buttonDisplay.id = "reset";
-      buttonDisplay.textContent = "Reset Game";
-    } else {
-      boardDisplay.classList.remove("active");
-      gameController.turnIsGameOver();
-      gameBoard.resetboardState();
-      buttonDisplay.id = "start";
-      buttonDisplay.textContent = "Start Game";
     }
+
+    gameBoard.resetboardState();
+    console.log(gameController.getIsGameOver());
+    boardDisplay.classList.remove("active");
+  };
+
+  const updateDisplay = () => {
+    let spots = document.querySelectorAll(".spot");
+
+    let currentBoard = gameBoard.getBoardState();
+
+    for (let spot of spots) {
+      let row = spot.dataset.row;
+      let col = spot.dataset.col;
+      spot.textContent = currentBoard[row][col];
+    }
+  };
+
+  buttonDisplay.addEventListener("click", (event) => {
+    if (event.target.id === "start") {
+      startDisplay();
+    } else {
+      resetDisplay();
+    }
+    console.table(gameBoard.getBoardState());
+    updateDisplay();
   });
 
   boardDisplay.addEventListener("click", (event) => {
@@ -152,8 +182,9 @@ const displayController = (() => {
         event.target.dataset.row,
         event.target.dataset.col,
       );
-      console.table(gameBoard.getBoardState());
     }
+    console.table(gameBoard.getBoardState());
+    updateDisplay();
   });
 })();
 
