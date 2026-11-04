@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 html,
@@ -17,11 +17,11 @@ body {
   width: 100vw;
   height: 100vh;
   grid-template-columns: 1fr 900px 1fr;
-  grid-template-rows: 3fr 900px 2fr;
+  grid-template-rows: 1fr 900px 1fr;
   grid-template-areas:
-    "player1 topo   player2"
+    "topo topo topo"
     "player1 ttt player2"
-    "player1 base   player2";
+    "base base base";
 }
 
 .ttt {
@@ -30,7 +30,7 @@ body {
   grid-template-rows: repeat(3, 1fr);
   border: 5px solid black;
   grid-area: ttt;
-  background-color: aquamarine;
+  background-color: black;
 }
 
 .spot {
@@ -38,23 +38,41 @@ body {
   align-content: center;
   color: white;
   font-size: 200px;
-  border: 5px solid black;
+  border: 5px solid white;
+}
+
+.player {
+  margin: 0 20%;
+  text-align: center;
+  align-content: center;
 }
 
 .player.one {
   grid-area: player1;
+  background-color: lightblue;
 }
 
 .player.two {
   grid-area: player2;
+  background-color: lightcoral;
 }
 
 .control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   grid-area: topo;
+  background-color: whitesmoke;
+}
+
+.control button {
+  font-size: 50px;
 }
 
 .result {
   text-align: center;
   align-content: center;
   grid-area: base;
+  background-color: whitesmoke;
 }

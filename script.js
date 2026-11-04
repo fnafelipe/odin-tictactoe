@@ -112,6 +112,8 @@ const gameController = (() => {
 
 
 
+
+
 /*
 pode ignorar daqui pra baixos, sao só testes
 
