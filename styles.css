@@ -24,21 +24,22 @@ body {
     "base base base";
 }
 
-.ttt {
+.board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  border: 5px solid black;
+  border: 10px solid white;
+  gap: 10px;
   grid-area: ttt;
-  background-color: black;
+  background-color: white;
 }
 
 .spot {
+  background-color: black;
   text-align: center;
   align-content: center;
   color: white;
   font-size: 200px;
-  border: 5px solid white;
 }
 
 .player {

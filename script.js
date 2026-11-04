@@ -1,5 +1,3 @@
-
-
 function createPlayer(mark) {
   const getMarker = () => mark;
 
@@ -110,9 +108,21 @@ const gameController = (() => {
   return { getCurrentPlayer, getIsGameOver, turnPlayer, makePlay };
 })();
 
+const displayController = (() => {
+  const boardDisplay = document.querySelector(".board");
+  console.log(boardDisplay);
 
-
-
+  boardDisplay.addEventListener("click", (event) => {
+    console.log(event);
+    if (event.target.className === "spot") {
+      gameController.makePlay(
+        event.target.dataset.row,
+        event.target.dataset.col,
+      );
+      console.log(gameBoard.getBoardState());
+    }
+  });
+})();
 
 /*
 pode ignorar daqui pra baixos, sao só testes
