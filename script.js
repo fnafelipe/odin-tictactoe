@@ -105,8 +105,11 @@ const gameController = (() => {
     }
   };
 
-  return { getCurrentPlayer, turnPlayer, makePlay, isGameOver };
+  return { getCurrentPlayer, getIsGameOver, turnPlayer, makePlay };
 })();
+
+/*
+pode ignorar daqui pra baixos, sao só testes
 
 gameController.makePlay(0, 2);
 console.table(gameBoard.getBoardState());
@@ -137,8 +140,6 @@ console.table(gameBoard.getBoardState());
 
 gameController.makePlay(2, 1);
 console.table(gameBoard.getBoardState());
-
-/*
 gameController.makePlay(0, 1);
 console.table(gameBoard.getBoardState());
 gameController.makePlay(0, 2);
