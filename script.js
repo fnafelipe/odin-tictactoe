@@ -38,11 +38,15 @@ const gameController = (() => {
   const playerOne = createPlayer("X");
   const playerTwo = createPlayer("O");
   let currentPlayer = playerOne;
-  let isGameOver = false;
+  let isGameOver = true;
 
   const getCurrentPlayer = () => currentPlayer;
 
   const getIsGameOver = () => isGameOver;
+
+  const turnIsGameOver = () => {
+    isGameOver = isGameOver ? false : true;
+  };
 
   const turnPlayer = () => {
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
@@ -105,21 +109,50 @@ const gameController = (() => {
     }
   };
 
-  return { getCurrentPlayer, getIsGameOver, turnPlayer, makePlay };
+  return {
+    getCurrentPlayer,
+    getIsGameOver,
+    turnIsGameOver,
+    turnPlayer,
+    makePlay,
+  };
 })();
 
 const displayController = (() => {
+  const control = document.querySelector(".control");
+
+  const buttonDisplay = document.createElement("button");
+
+  buttonDisplay.textContent = "Start Game";
+
+  buttonDisplay.id = "start";
+
+  control.appendChild(buttonDisplay);
+
   const boardDisplay = document.querySelector(".board");
-  console.log(boardDisplay);
+
+  buttonDisplay.addEventListener("click", () => {
+    if (gameController.getIsGameOver()) {
+      boardDisplay.classList.add("active");
+      gameController.turnIsGameOver();
+      buttonDisplay.id = "reset";
+      buttonDisplay.textContent = "Reset Game";
+    } else {
+      boardDisplay.classList.remove("active");
+      gameController.turnIsGameOver();
+      buttonDisplay.id = "start";
+      buttonDisplay.textContent = "Start Game";
+    }
+    console.log(gameController.getIsGameOver());
+  });
 
   boardDisplay.addEventListener("click", (event) => {
-    console.log(event);
     if (event.target.className === "spot") {
       gameController.makePlay(
         event.target.dataset.row,
         event.target.dataset.col,
       );
-      console.log(gameBoard.getBoardState());
+      console.table(gameBoard.getBoardState());
     }
   });
 })();
