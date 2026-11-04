@@ -25,26 +25,36 @@ body {
 }
 
 .ttt {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  border: 5px solid black;
   grid-area: ttt;
-  background-color: purple;
+  background-color: aquamarine;
+}
+
+.spot {
+  text-align: center;
+  align-content: center;
+  color: white;
+  font-size: 200px;
+  border: 5px solid black;
 }
 
 .player.one {
   grid-area: player1;
-  background-color: red;
 }
 
 .player.two {
   grid-area: player2;
-  background-color: yellow;
 }
 
 .control {
   grid-area: topo;
-  background-color: green;
 }
 
 .result {
+  text-align: center;
+  align-content: center;
   grid-area: base;
-  background-color: orange;
 }
