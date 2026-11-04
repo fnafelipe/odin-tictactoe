@@ -1,3 +1,5 @@
+
+
 function createPlayer(mark) {
   const getMarker = () => mark;
 
@@ -107,6 +109,8 @@ const gameController = (() => {
 
   return { getCurrentPlayer, getIsGameOver, turnPlayer, makePlay };
 })();
+
+
 
 /*
 pode ignorar daqui pra baixos, sao só testes

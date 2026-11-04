@@ -1,3 +1,50 @@
 * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.container {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-columns: 1fr 900px 1fr;
+  grid-template-rows: 3fr 900px 2fr;
+  grid-template-areas:
+    "player1 topo   player2"
+    "player1 ttt player2"
+    "player1 base   player2";
+}
+
+.ttt {
+  grid-area: ttt;
+  background-color: purple;
+}
+
+.player.one {
+  grid-area: player1;
+  background-color: red;
+}
+
+.player.two {
+  grid-area: player2;
+  background-color: yellow;
+}
+
+.control {
+  grid-area: topo;
+  background-color: green;
+}
+
+.result {
+  grid-area: base;
+  background-color: orange;
 }
